@@ -1,0 +1,33 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_WALLET_CONNECT_ID=${NEXT_PUBLIC_WALLET_CONNECT_ID}
+      - NEXT_PUBLIC_ALCHEMY_KEY=${NEXT_PUBLIC_ALCHEMY_KEY}
+      - NEXT_PUBLIC_CHAIN_ID=42161
+      - NEXT_PUBLIC_AI_API_URL=http://ai-backend:5000
+    depends_on:
+      - ai-backend
+    networks:
+      - mutualchain
+
+  ai-backend:
+    build:
+      context: ./ai-backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    environment:
+      - FLASK_ENV=production
+    networks:
+      - mutualchain
+
+networks:
+  mutualchain:
+    driver: bridge
