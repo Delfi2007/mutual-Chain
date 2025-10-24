@@ -10,6 +10,11 @@ export const metadata: Metadata = {
   keywords: 'DeFi, Insurance, AI, Blockchain, Smart Contracts, Risk Assessment, P2P Insurance',
 }
 
+// Speed up page transitions
+export const viewport = {
+  themeColor: '#000000',
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -17,6 +22,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="dns-prefetch" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" crossOrigin="anonymous" />
+      </head>
       <body>
         <Providers>
           <div className="min-h-screen flex flex-col bg-white text-black">

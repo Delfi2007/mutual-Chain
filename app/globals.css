@@ -17,21 +17,37 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Performance optimizations */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button, a {
+  touch-action: manipulation;
+}
+
+/* Faster GPU-accelerated transitions */
 @layer components {
   .btn-primary {
-    @apply px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 transition-all duration-200 shadow-md hover:shadow-lg;
+    @apply px-6 py-3 bg-black text-white rounded-lg font-semibold hover:bg-gray-800 shadow-md hover:shadow-lg;
+    transition: all 50ms ease-out;
+    will-change: transform;
   }
   
   .btn-secondary {
-    @apply px-6 py-3 bg-white text-black border-2 border-black rounded-lg font-semibold hover:bg-gray-50 transition-all duration-200;
+    @apply px-6 py-3 bg-white text-black border-2 border-black rounded-lg font-semibold hover:bg-gray-50;
+    transition: all 50ms ease-out;
   }
   
   .card {
-    @apply bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md transition-shadow duration-200;
+    @apply bg-white border border-gray-200 rounded-xl p-6 shadow-sm hover:shadow-md;
+    transition: box-shadow 50ms ease-out;
+    will-change: box-shadow;
   }
   
   .input-field {
-    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none transition-all;
+    @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-black focus:border-transparent outline-none;
+    transition: all 50ms ease-out;
   }
   
   .gradient-text {
@@ -39,11 +55,24 @@ body {
   }
 }
 
-.animate-float {
-  animation: float 3s ease-in-out infinite;
+/* Optimized animations - only when needed */
+@media (prefers-reduced-motion: no-preference) {
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
 }
 
 @keyframes float {
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-10px); }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Reduce paint area */
+img, video {
+  content-visibility: auto;
 }
