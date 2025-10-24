@@ -1,0 +1,5 @@
+# Backend dependencies with PostgreSQL support
+psycopg2-binary==2.9.9
+redis==5.0.1
+graphene==3.3
+websockets==12.0
